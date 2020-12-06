@@ -26,6 +26,7 @@ public class CurrencyExchangeController {
 	public ExchangeValue retrieveExchangevalue(@PathVariable String from, @PathVariable String to) {
 		List<ExchangeValue> exchangeValues = repo.findByFromAndTo(from, to);
 		if(exchangeValues != null && exchangeValues.size() > 0) {
+			exchangeValues.get(0).setPort(Integer.parseInt(env.getProperty("local.server.port")));
 			return exchangeValues.get(0);
 		}
 		return null;
